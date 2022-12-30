@@ -110,7 +110,7 @@ public struct JWS {
         self = try JOSEDeserializer().deserialize(JWS.self, fromCompactSerialization: compactSerializationString)
     }
 
-    fileprivate init(header: JWSHeader, payload: Payload, signature: Data) {
+    public init(header: JWSHeader, payload: Payload, signature: Data) {
         self.header = header
         self.payload = payload
         self.signature = signature

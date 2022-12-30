@@ -24,7 +24,7 @@
 
 import Foundation
 
-protocol VerifierProtocol {
+public protocol VerifierProtocol {
     var algorithm: SignatureAlgorithm { get }
 
     /// Verifies a signature against a given signing input with a specific algorithm and the corresponding key.
@@ -70,6 +70,11 @@ public struct Verifier {
                 return nil
             }
             self.verifier = ECVerifier(algorithm: verifyingAlgorithm, publicKey: key as! ECVerifier.KeyType)
+        case .ES256K:
+            guard type(of: key) is Secp256k1Verifier.KeyType.Type else {
+                return nil
+            }
+            self.verifier = Secp256k1Verifier(algorithm: verifyingAlgorithm, publicKey: key as! Secp256k1Verifier.KeyType)
         }
     }
 

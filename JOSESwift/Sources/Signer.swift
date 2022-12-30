@@ -24,7 +24,7 @@
 
 import Foundation
 
-protocol SignerProtocol {
+public protocol SignerProtocol {
     var algorithm: SignatureAlgorithm { get }
 
     /// Signs input data.
@@ -69,6 +69,11 @@ public struct Signer<KeyType> {
             }
             // swiftlint:disable:next force_cast
             self.signer = ECSigner(algorithm: signingAlgorithm, privateKey: key as! ECSigner.KeyType)
+        case .ES256K:
+            guard type(of: key) is Secp256k1Signer.KeyType.Type else {
+                return nil
+            }
+            self.signer = Secp256k1Signer(algorithm: signingAlgorithm, privateKey: key as! Secp256k1Signer.KeyType)
         }
     }
 
