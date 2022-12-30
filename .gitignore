@@ -89,3 +89,4 @@ fastlane/test_output
 
 # SPM
 Package.resolved
+.build
