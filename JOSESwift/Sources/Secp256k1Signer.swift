@@ -17,7 +17,7 @@ internal struct Secp256k1Signer: SignerProtocol {
     
     func sign(_ signingInput: Data) throws -> Data {
         let secp256k1PrivateKey = try secp256k1.Signing.PrivateKey(rawRepresentation: self.privateKey, format: .uncompressed)
-        return try secp256k1PrivateKey.ecdsa.signature(for: signingInput).rawRepresentation
+        return try secp256k1PrivateKey.ecdsa.signature(for: signingInput).compactRepresentation
 
     }
 }

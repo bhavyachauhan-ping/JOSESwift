@@ -18,7 +18,7 @@ internal struct Secp256k1Verifier: VerifierProtocol {
 
     func verify(_ verifyingInput: Data, against signature: Data) throws -> Bool {
         let secp256k1PublicKey = try secp256k1.Signing.PublicKey(rawRepresentation: self.publicKey, format: .uncompressed)
-        let ecdsaSignature = try secp256k1.Signing.ECDSASignature(rawRepresentation: signature)
+        let ecdsaSignature = try secp256k1.Signing.ECDSASignature(compactRepresentation: signature)
         return secp256k1PublicKey.ecdsa.isValidSignature(ecdsaSignature, for: verifyingInput)
 
     }
