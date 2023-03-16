@@ -7,10 +7,12 @@ let package = Package(
     products: [
         .library(name: "JOSESwift", targets: ["JOSESwift"])
     ],
-    dependencies: [.package(url: "https://github.com/bhavyachauhan-ping/secp256k1.swift", Package.Dependency.Requirement.branch("secp256k1lib"))],
+    dependencies: [
+        .package(url: "https://github.com/bhavyachauhan-ping/secp256k1.swift", branch: "libsecp256k1")
+    ],
     targets: [
         .target(name: "JOSESwift",
-                dependencies: [.product(name: "secp256k1lib", package: "secp256k1.swift")],
+                dependencies: [.product(name: "libsecp256k1", package: "secp256k1.swift")],
                 path: "JOSESwift")
     ],
     swiftLanguageVersions: [.v5])
